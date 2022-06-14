@@ -41,6 +41,17 @@ class Chapter3 {
         chars[to] = tmp
         return chars.concatToString()
     }
+
+    fun mul(a: Int, b: Int) = a*b // 1
+    fun mul(a: Int, b: Int, c: Int) = a*b*c // 2
+    fun mul(s: String, n: Int) = s.repeat(n) // 3
+    fun mul(o: Any, n: Int) = Array(n) { o } // 4
+
+    fun restrictToRange(
+        from: Int = Int.MIN_VALUE,
+        to: Int = Int.MAX_VALUE,
+        what: Int
+    ): Int = from.coerceAtLeast(to.coerceAtMost(what))
 }
 
 fun main() {
@@ -67,4 +78,12 @@ fun main() {
     println(chapter3.swap(from = 1, s = "Hello", to = 2))
     println(chapter3.swap(s = "Hello", 1, 2))
     println(chapter3.swap(s = "Hello", 1, to = 2))
+
+    chapter3.mul(1, 2) // Int가 Any의 하위 타입이므로 1과 4중에 1을 선택
+    //chapter3.mul(1, 2L) // (Int, Long)타입을 받을 수 있는 함수가 없으므로 오류
+    chapter3.mul(1L, 2) // (Long, Int) 타입을 받을 수 있는 함수는 4번
+    chapter3.mul("0", 3) // String이 Any의 하위 타입이기 때문에 3과 4중에 3을 선택
+    chapter3.mul("0" as Any, 3) // (Any, Int)를 받을 수 있는 함수는 4뿐이므로 4를 선택
+
+    println(chapter3.restrictToRange(10, 20, 5))
 }
