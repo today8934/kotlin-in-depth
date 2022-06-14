@@ -52,6 +52,11 @@ class Chapter3 {
         to: Int = Int.MAX_VALUE,
         what: Int
     ): Int = from.coerceAtLeast(to.coerceAtMost(what))
+
+    fun printSorted(vararg items: Int) {
+        items.sort()
+        println(items.contentToString())
+    }
 }
 
 fun main() {
@@ -86,4 +91,20 @@ fun main() {
     chapter3.mul("0" as Any, 3) // (Any, Int)를 받을 수 있는 함수는 4뿐이므로 4를 선택
 
     println(chapter3.restrictToRange(10, 20, 5))
+    chapter3.printSorted(6, 2, 10, 1)
+
+    val numbers = intArrayOf(6, 2, 10, 1)
+    chapter3.printSorted(*numbers) // * 연산자를 사용하면 배열을 가변 인자 대신 넘길 수 있다.
+    //chapter3.printSorted(numbers)
+
+    val b = intArrayOf(6, 2, 10, 1)
+    chapter3.printSorted(*b)
+    println(b.contentToString()) // 스프레드 연산자(*)는 배열을 복사해서 넘기므로 원본 배열에는 영향을 미치지 않는다.
+
+    /*
+    둘 이상을 vararg 파라미터로 선언하는 것은 금지된다.
+    하지만 vararg 파라미터에 콤마로 분리한 여러 인자와 스프레드를 섞어서 전달하는 것은 괜찮음.
+     */
+    chapter3.printSorted(6, 1, *intArrayOf(3, 8), 2)
+
 }
