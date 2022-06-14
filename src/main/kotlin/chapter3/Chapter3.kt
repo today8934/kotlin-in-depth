@@ -57,6 +57,14 @@ class Chapter3 {
         items.sort()
         println(items.contentToString())
     }
+
+    fun max(a: Int, b: Int) = if (a > b) a else b
+
+    fun renamePackage(fullName: String, newName: String): String {
+        val i = fullName.lastIndexOf('.')
+        val prefix = if (i >= 0) fullName.substring(0, i + 1) else return newName
+        return prefix + newName
+    }
 }
 
 fun main() {
@@ -107,4 +115,20 @@ fun main() {
      */
     chapter3.printSorted(6, 1, *intArrayOf(3, 8), 2)
 
+    println(chapter3.max(10, 15))
+
+    /*
+    코틀린은 자바와 달리 삼항연산자(조건 ? 참일때 : 거짓일때)가 없다. 대신 이를 if문으로 쓸 수 있다.
+     */
+    val s = readLine()!!
+    val i = s.indexOf("/")
+    val result = if (i >= 0) {
+        val a = s.substring(0, i).toInt()
+        val b = s.substring(i + 1).toInt()
+        (a/b).toString()
+    } else ""
+
+    println(result)
+
+    println(chapter3.renamePackage("foo.bar.old", "new"))
 }
