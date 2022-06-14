@@ -31,6 +31,16 @@ class Chapter3 {
     반환 타입도 생략가능(타입 추론)
      */
     fun circleArea2(radius: Double): Double = PI*radius*radius
+
+    fun rectangleArea(width: Double, height: Double): Double = width*height
+
+    fun swap(s: String, from: Int, to: Int): String {
+        val chars = s.toCharArray()
+        val tmp = chars[from]
+        chars[from] = chars[to]
+        chars[to] = tmp
+        return chars.concatToString()
+    }
 }
 
 fun main() {
@@ -44,4 +54,17 @@ fun main() {
     chapter3.prompt("Wooksang")
 
     println(chapter3.circleArea2(2.5))
+
+    val w = readLine()!!.toDouble()
+    val h = readLine()!!.toDouble()
+    println(chapter3.rectangleArea(width = w, height = h)) // named argument
+    println(chapter3.rectangleArea(height = h, width = w)) // 이런식으로도 호출 가능하다
+
+    println(chapter3.swap("Hello", 1, 2))
+    println(chapter3.swap("Hello", from = 1, to = 2))
+    println(chapter3.swap("Hello", to = 3, from = 0))
+    println(chapter3.swap("Hello", 1, to = 3))
+    println(chapter3.swap(from = 1, s = "Hello", to = 2))
+    println(chapter3.swap(s = "Hello", 1, 2))
+    println(chapter3.swap(s = "Hello", 1, to = 2))
 }
