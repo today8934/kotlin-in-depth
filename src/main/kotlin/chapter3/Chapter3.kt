@@ -152,6 +152,22 @@ class Chapter3 {
         }
         return -1
     }
+
+    tailrec fun binIndexOf(
+        x: Int,
+        array: IntArray,
+        from: Int = 0,
+        to: Int = array.size
+    ): Int {
+        if (from == to) return -1
+        val midIndex = (from + to - 1) / 2
+        val mid = array[midIndex]
+        return when {
+            mid < x -> binIndexOf(x, array, midIndex + 1, to)
+            mid > x -> binIndexOf(x, array, from, midIndex)
+            else -> midIndex
+        }
+    }
 }
 
 fun main() {
@@ -226,4 +242,8 @@ fun main() {
     continue: 현재 루프 이터레이션을 마치고 조건검사로 이동한다.
      */
     chapter3.forStatement()
+
+    val array = IntArray(11) {it*it}
+
+    println(chapter3.binIndexOf(16, array, 0))
 }
