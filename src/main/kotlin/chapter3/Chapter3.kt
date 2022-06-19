@@ -143,6 +143,24 @@ class Chapter3 {
         return num
     }
 
+    /*
+    예외를 던질 때는 다음과 같은 일이 벌어진다.
+    - Exception Handler를 찾아 예외와 일치하는 핸들러가 있다면 해당 핸들러가 예외를 처리한다.
+    - 현재 함수 내에서 핸들러를 찾을 수 없으면 함수 실행이 종료되고 함수가 스택에서 제거된다. 그리고 함수를 호출한 쪽에서 예외 핸들러를 검색한다.
+    - 프로그램 진입점에 이를 때 까지 예외를 잡아내지 못하면 현재 스레드가 종료된다.
+     */
+    fun parseIntNumberWithException(s: String, fallback: Int = -1): Int {
+        var num = 0
+
+        if (s.length !in 1..31) throw NumberFormatException("Not a number: $s")
+
+        for (c in s) {
+            if (c !in '0'..'1') throw NumberFormatException("Not a number: $s")
+            num = num*2 + (c - '0')
+        }
+        return num
+    }
+
     fun indexOf(subarray: IntArray, array: IntArray): Int {
         outerLoop@ for (i in array.indices) {
             for (j in subarray.indices) {
