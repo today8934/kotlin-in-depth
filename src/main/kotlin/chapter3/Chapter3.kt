@@ -142,6 +142,16 @@ class Chapter3 {
         }
         return num
     }
+
+    fun indexOf(subarray: IntArray, array: IntArray): Int {
+        outerLoop@ for (i in array.indices) {
+            for (j in subarray.indices) {
+                if (subarray[j] != array[i + j]) continue@outerLoop
+            }
+            return i
+        }
+        return -1
+    }
 }
 
 fun main() {
