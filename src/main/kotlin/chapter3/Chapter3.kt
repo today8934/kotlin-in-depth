@@ -160,7 +160,7 @@ class Chapter3 {
         to: Int = array.size
     ): Int {
         if (from == to) return -1
-        val midIndex = (from + to - 1) / 2
+        val midIndex = (from + to - 1) / 2 //홀수일 경우 버림이 적용된다.
         val mid = array[midIndex]
         return when {
             mid < x -> binIndexOf(x, array, midIndex + 1, to)
@@ -243,7 +243,7 @@ fun main() {
      */
     chapter3.forStatement()
 
-    val array = IntArray(11) {it*it}
+    val array = IntArray(10) {it*it}
 
     println(chapter3.binIndexOf(16, array, 0))
 }
