@@ -78,6 +78,14 @@ class Chapter3 {
 
         println(arr.contentToString())
     }
+
+    fun hexDigit(n: Int): Char {
+        return when (n) {
+            in 0..9 -> '0' + n
+            in 10..15 -> 'A' + n - 10
+            else -> '?'
+        }
+    }
 }
 
 fun main() {
