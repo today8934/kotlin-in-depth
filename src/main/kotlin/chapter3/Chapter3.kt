@@ -1,6 +1,7 @@
 package chapter3
 
 import kotlin.math.PI
+import kotlin.random.Random
 
 class Chapter3 {
 
@@ -86,6 +87,61 @@ class Chapter3 {
             else -> '?'
         }
     }
+
+    fun doWhileStatement() {
+        var sum = 0
+        var num = 0
+
+        do {
+            num = readLine()!!.toInt()
+            sum += sum
+        } while (num != 0)
+
+        println("Sum: $sum")
+    }
+
+    fun whileStatement() {
+        val num = Random.nextInt(1, 101)
+        var guess = 0
+
+        while (guess != num) {
+            guess = readLine()!!.toInt()
+            if (guess < num) println("Too small")
+            else if (guess > num) println("Too big")
+        }
+        println("Right: it's $num")
+    }
+
+    fun forStatement() {
+        val a = IntArray(10) {it*it}
+        var sum = 0
+
+        for (x in a) {
+            sum+= x
+        }
+
+        println("Sum: $sum")
+
+        for (i in 0..a.lastIndex) {
+            println(i)
+        }
+
+        for (i in 0..a.lastIndex step 2) {
+            println(i)
+        }
+    }
+
+    fun parseIntNumber(s: String, fallback: Int = -1): Int {
+        var num = 0
+
+        if (s.length !in 1..31) return fallback
+
+        for (c in s) {
+            if (c !in '0'..'1') return fallback
+            num = num*2 + (c - '0')
+        }
+        return num
+    }
 }
 
 fun main() {
@@ -154,4 +210,10 @@ fun main() {
     println(chapter3.renamePackage("foo.bar.old", "new"))
 
     chapter3.range()
+
+    /*
+    break: 루프를 종료시키고, 루프 바로 다음 문으로 실행흐름을 이동시킨다
+    continue: 현재 루프 이터레이션을 마치고 조건검사로 이동한다.
+     */
+    chapter3.forStatement()
 }
