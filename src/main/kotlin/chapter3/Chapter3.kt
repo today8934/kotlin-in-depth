@@ -186,6 +186,16 @@ class Chapter3 {
             else -> midIndex
         }
     }
+
+    /*
+    - 자바와 달리 코틀린에서의 try는 문(statement)이 아니라 식(expression)이기 때문에 다음과 같이 쓸 수 있다.
+    - 자바와 달리 코틀린에서는 checked exception과 unchecked exception을 구분하지 않는다.
+     */
+    fun readInt(default: Int) = try {
+        readLine()!!.toInt()
+    } catch (e: NumberFormatException) {
+        default
+    }
 }
 
 fun main() {
