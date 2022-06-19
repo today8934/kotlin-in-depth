@@ -65,6 +65,19 @@ class Chapter3 {
         val prefix = if (i >= 0) fullName.substring(0, i + 1) else return newName
         return prefix + newName
     }
+
+    fun range() {
+        val chars = 'a' .. 'h'
+        val twoDigits = 10..99
+        val zero2One = 0.0..1.0
+
+        1..10 step 3
+        15 downTo 9 step 2
+
+        val arr = IntArray(10) { it }.sliceArray(2..5)
+
+        println(arr.contentToString())
+    }
 }
 
 fun main() {
@@ -131,4 +144,6 @@ fun main() {
     println(result)
 
     println(chapter3.renamePackage("foo.bar.old", "new"))
+
+    chapter3.range()
 }
