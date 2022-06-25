@@ -128,3 +128,19 @@ fun nullableToNotNullable() {
 
     //ss변수에 s를 넣으면 컴파일 오류가 발생한다. not nullable 타입에 nullable 타입을 넣을 수 없기 때문
 }
+
+/*
+스마트캐스트
+ */
+fun describeNumber(n: Int?) = when (n) {
+    null -> "null"
+    in 0..10 -> "small"
+    in 11..100 -> "large"
+    else -> "out of range"
+}
+
+/*
+스마트캐스트
+ */
+fun isSingleChar(s: String?) = s != null && s.length ==1
+
