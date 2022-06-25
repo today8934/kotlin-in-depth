@@ -189,3 +189,39 @@ class Content {
 
 fun getContentSize(content: Content) = content.text.length
 
+class Person9(var firstName: String, var familyName: String) {
+    /*
+    커스텀 게터는 프로퍼티를 읽으면 자동으로 get 함수를 호출한다.
+     */
+    var fullName: String
+        get(): String { //커스텀 게터
+            return "$firstName $familyName"
+        }
+        set(value) {
+            val names = value.split(" ")
+            if (names.size != 2) {
+                throw IllegalArgumentException("Invalid full name: '$value")
+            }
+            firstName = names[0]
+            familyName = names[1]
+        }
+
+    val fullName2: String //식이 본문인 형태를 사용할 수 있다.
+        get() = "$firstName $familyName"
+
+    val fullName3 //코틀린 1.1부터는 타입추론으로 인해 타입을 생략할 수 있다.
+        get() = "$firstName $familyName"
+
+    var age: Int? = null
+        set(value) {
+            if (value != null && value <= 0) {
+                throw IllegalArgumentException("Invalid age: $value")
+            }
+            field = value
+        }
+}
+
+val text by lazy { // lazy 프로퍼티는 thread-safe하다.
+    File("data.txt").readText()
+}
+
