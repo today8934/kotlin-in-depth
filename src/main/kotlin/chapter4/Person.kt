@@ -54,6 +54,19 @@ fun main() {
     sayHello()
 }
 
+fun sayHello(name: String?) {
+    println("Hello, " + (name ?: "Unknown")) //Elvis 연산자. name이 널이 아닐 경우에는 name, 널일경우 Unknown이 리턴된다.
+}
+
+class Name(val firstName: String, val familyName: String?)
+
+class Person8(val name: Name?) {
+    fun describe(): String {
+        val currentName = name ?: return "Unknown"
+        return "${currentName.firstName} ${currentName.familyName}"
+    }
+}
+
 class Room(vararg val persons: Person /* 함수와 마찬가지로 디폴트 값과 vararg 를 생성자 파라미터에 사용할 수 있다. */) {
     fun showNames() {
         for (person in persons) println(person.fullName)
