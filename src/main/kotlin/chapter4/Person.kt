@@ -225,3 +225,26 @@ val text by lazy { // lazy 프로퍼티는 thread-safe하다.
     File("data.txt").readText()
 }
 
+/*
+object라는 키워드로 클래스를 싱글톤으로 선언할 수 있다.
+ */
+object Application {
+    val name = "My Application"
+
+    override fun toString() = name
+
+    fun exit() {}
+}
+
+class Application2 private constructor(val name: String) {
+    /*
+    companion object를 선언하면 동반 객체의 이름을 명시하지 않고도 동반객체의 프로퍼티에 접근할 수 있다.
+    동반 객체 선언 시 객체명(여기서는 Factory)을 생략할수도 있다.(권장)
+     */
+    companion object Factory {
+        fun create(args: Array<String>): Application2? {
+            val name = args.firstOrNull() ?: return null
+            return Application2(name)
+        }
+    }
+}
