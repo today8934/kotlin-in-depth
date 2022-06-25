@@ -1,5 +1,7 @@
 package chapter4
 
+import java.io.File
+
 class Person(val fullName: String /* 주생성자 파라미터*/) {
     /*
     주생성자 파라미터에서 val 이나 var 키워드를 사용하면 클래스 멤버변수 선언을 사용하지 않을 수도 있다.(권장)
@@ -169,4 +171,21 @@ fun describeNumber(n: Int?) = when (n) {
 스마트캐스트
  */
 fun isSingleChar(s: String?) = s != null && s.length ==1
+
+class Content {
+    /*
+    lateinit 표시가 붙은 프로퍼티는 값을 읽으려고 시도할 때
+    프로그램이 프로퍼티가 초기화됐는지 검사해서 초기화되지 않은 경우
+    UninitializedPropertyAccessException을 던진다.
+    lateinit을 사용하기 위해서는 변수를 var로 선언해야 하며
+    Int나 Boolean 같은 원시 값을 표현하는 타입이 아니어야 한다.
+     */
+    lateinit var text: String
+
+    fun loadFile(file: File) {
+        text = file.readText()
+    }
+}
+
+fun getContentSize(content: Content) = content.text.length
 
