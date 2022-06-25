@@ -35,6 +35,10 @@ fun main() {
     println(person5.fullName())
 
     //val empty = Empty() Empty 클래스의 주생성사자 private이기때문에 init할 수 없다.
+
+    val id = Person6.Id("John", "Doe")
+    val person6 = Person6(id, 25)
+    person6.showMe()
 }
 
 class Room(vararg val persons: Person /* 함수와 마찬가지로 디폴트 값과 vararg 를 생성자 파라미터에 사용할 수 있다. */) {
@@ -91,4 +95,15 @@ class Person5(
  */
 class Empty private constructor() {
     fun showMe() = println("Empty")
+}
+
+class Person6(val id: Id, val age: Int) {
+    class Id(val firstName: String, val familyName: String)
+    fun showMe() = println("${id.firstName} ${id.familyName}, $age")
+}
+
+class Person7(private val id: Id, private val age: Int) {
+    class Id(private val firstName: String, private val familyName: String) {
+        fun nameSake(person: Person7) = person.id.firstName == firstName
+    }
 }
