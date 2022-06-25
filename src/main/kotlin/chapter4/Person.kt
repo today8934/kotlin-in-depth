@@ -248,3 +248,19 @@ class Application2 private constructor(val name: String) {
         }
     }
 }
+
+/*
+코틀린 객체 식
+ */
+fun midPoint(xRange: IntRange, yRange: IntRange) = object {
+    val x = (xRange.first + xRange.last)/2
+    val y = (yRange.first + yRange.last)/2
+}
+
+fun anonymousObject() {
+    val o = object {
+        val x = readLine()!!.toInt()
+        val y = readLine()!!.toInt()
+    }
+    println(o.x + o.y)
+}
