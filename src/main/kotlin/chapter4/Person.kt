@@ -107,3 +107,24 @@ class Person7(private val id: Id, private val age: Int) {
         fun nameSake(person: Person7) = person.id.firstName == firstName
     }
 }
+
+/*
+코틀린의 모든 참조타입은 기본적으로 null이 될 수 없다.
+코틀린에서 널이 될 수 있는 값을 받으려면, 파라미터 선언 시 파라미터 타입 뒤에 물음표(?)를 붙여서 널이 될 수 있는 타입임을 명시해야한다.
+ */
+fun isLetterString(s: String): Boolean {
+    if (s.isEmpty()) return false
+    for (ch in s) {
+        if (!ch.isLetter()) return false
+    }
+    return true
+}
+
+fun isBooleanString(s: String?) = s == "false" || s == "true"
+
+fun nullableToNotNullable() {
+    val s: String? = "abc"
+    val ss: String
+
+    //ss변수에 s를 넣으면 컴파일 오류가 발생한다. not nullable 타입에 nullable 타입을 넣을 수 없기 때문
+}
