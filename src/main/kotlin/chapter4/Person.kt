@@ -39,6 +39,19 @@ fun main() {
     val id = Person6.Id("John", "Doe")
     val person6 = Person6(id, 25)
     person6.showMe()
+
+    var name: String? = null
+
+    fun initialize() {
+        name = "John"
+    }
+
+    fun sayHello() {
+        println(name!!.uppercase())
+    }
+
+    initialize()
+    sayHello()
 }
 
 class Room(vararg val persons: Person /* 함수와 마찬가지로 디폴트 값과 vararg 를 생성자 파라미터에 사용할 수 있다. */) {
