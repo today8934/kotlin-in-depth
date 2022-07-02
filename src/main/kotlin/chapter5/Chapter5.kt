@@ -24,6 +24,33 @@ fun main() {
 
     println(check2("Hello") { _, c -> c.isLetter() }) //사용하지 않는 람다 파라미터를 _로 지정할 수 있다.
     println(check2("Hello") { i, c -> i == 0 || c.isLowerCase() })
+
+    println(check3("Hello") { c -> isCapitalLetter(c) })
+    println(check3("Hello") { isCapitalLetter(it) })
+    println(check3("Hello", ::isCapitalLetter)) //호출 가능 참조: ::isCapitalLetter 이 식이 가리키는 isCapitalLetter() 함수와 같은 동작을 하는 함수값을 표현해준다.
+
+    println(evalAtZero(::inc))
+    println(evalAtZero(::dec))
+
+    /*
+    바인딩된 호출 가능 참조(bound callable reference)
+    멤버 함수를 호출할 수 있다.
+     */
+    val isJohn = Person("John", "Doe")::hasNameOf
+    println(isJohn("JOHN"))
+    println(isJohn("Jake"))
+
+    val person = Person("John", "Doe")
+    val readName = person::firstName.getter
+    val writeFamily = person::familyName.setter
+
+    println(readName)
+    writeFamily("Smith")
+    println(person.familyName)
+}
+
+class Person(var firstName: String, var familyName: String) {
+    fun hasNameOf(name: String) = name.equals(firstName, ignoreCase = true)
 }
 
 /*
@@ -102,3 +129,15 @@ fun forEach(a: IntArray, action: (Int) -> Unit) {
         action(n)
     }
 }
+
+fun check3(s: String, condition: (Char) -> Boolean): Boolean {
+    for (c in s) {
+        if (!condition(c)) return false
+    }
+    return true
+}
+
+fun isCapitalLetter(c: Char) = c.isUpperCase() && c.isLetter()
+fun evalAtZero(f: (Int) -> Int) = f(0)
+fun inc(n: Int) = n + 1
+fun dec(n: Int) = n - 1
