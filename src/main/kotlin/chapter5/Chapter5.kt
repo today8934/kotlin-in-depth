@@ -41,14 +41,20 @@ fun main() {
     println(isJohn("Jake"))
 
     val person = Person("John", "Doe")
-    val readName = person::firstName.getter
-    val writeFamily = person::familyName.setter
+    //val readName = person::firstName.getter
+    //val writeFamily = person::familyName.setter
 
-    println(readName)
-    writeFamily("Smith")
+    //println(readName)
+    //writeFamily("Smith")
     println(person.familyName)
 
     println(indexOf(intArrayOf(4, 3, 2, 1)) { it < 3})
+
+    println("Hello".truncate(3))
+}
+
+fun String.truncate(maxLength: Int): String {
+    return if (length <= maxLength) this else substring(0, maxLength)
 }
 
 /*
