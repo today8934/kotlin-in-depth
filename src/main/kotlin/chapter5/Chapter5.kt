@@ -47,6 +47,30 @@ fun main() {
     println(readName)
     writeFamily("Smith")
     println(person.familyName)
+
+    println(indexOf(intArrayOf(4, 3, 2, 1)) { it < 3})
+}
+
+/*
+indexOf 함수에서 원래대로라면 condition 함수 객체를 넘겨받을 때 항상 새로운 객체를 생성한다.
+이를 최적화 시켜줄 수 있는 키워드가 inline 키워드이다.
+인라인 키워드를 사용하면 함수를 넘겨받을 때 마다 객체를 새로 생성하지 않고 넘겨받는 함수가 함수의 내부에 픽스되게 된다.
+ */
+inline fun indexOf(numbers: IntArray, condition: (Int) -> Boolean): Int {
+    for (i in numbers.indices) {
+        if (condition(numbers[i])) return i
+    }
+
+    return -1
+}
+
+/*
+null이 될 수 있는 타입의 인자를 받을 수 없다.
+이런경우 특정 람다를 인라인하지 말라고 파라미터 앞에 noinline 키워드를 붙일 수 있다.
+ */
+inline fun forEach2(a: IntArray, noinline  action: ((Int) -> Unit)?) {
+    if (action == null) return
+    for (n in a) action(n)
 }
 
 class Person(var firstName: String, var familyName: String) {
